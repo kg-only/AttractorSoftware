@@ -16,7 +16,7 @@ private lateinit var adapter: AdapterImages
 
 class SecondScreenFragment : Fragment(R.layout.fragment_second_screen) {
 
-    private val viewModel = ViewModel()
+    private val viewModel = PhotoViewModel()
     private val binding by viewBinding(FragmentSecondScreenBinding::bind)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -52,13 +52,12 @@ class SecondScreenFragment : Fragment(R.layout.fragment_second_screen) {
         intent.addCategory(Intent.CATEGORY_OPENABLE)
         intent.type = "image/*"
         startActivityForResult(intent, REQUEST_CODE);
-
     }
 
     //получение фото
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         //метод из view model
-        viewModel.getUser(requestCode, resultCode, data)
+        viewModel.getPhoto(requestCode, resultCode, data)
     }
 }

@@ -9,13 +9,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 
-class ViewModel : ViewModel() {
+class PhotoViewModel : ViewModel() {
 
     val setMultiPhoto = MutableLiveData<List<String>>()
     val setOnePhoto = MutableLiveData<String>()
     private val REQUEST_CODE = 200
 
-    fun getUser(requestCode: Int, resultCode: Int, data: Intent?) {
+    fun getPhoto(requestCode: Int, resultCode: Int, data: Intent?) {
         viewModelScope.launch {
             try {
                 if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE) {

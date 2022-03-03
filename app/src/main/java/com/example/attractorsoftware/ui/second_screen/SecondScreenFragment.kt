@@ -1,9 +1,7 @@
 package com.example.attractorsoftware.ui.second_screen
 
 
-import android.app.Activity
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -18,6 +16,7 @@ private lateinit var adapter: AdapterImages
 
 class SecondScreenFragment : Fragment(R.layout.fragment_second_screen) {
 
+    private val viewModel = ViewModel()
     private val binding by viewBinding(FragmentSecondScreenBinding::bind)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -26,6 +25,12 @@ class SecondScreenFragment : Fragment(R.layout.fragment_second_screen) {
         binding.btn.setOnClickListener {
             openGalleryForImages()
         }
+        //много фото
+        viewModel.setMultiPhoto.observe(viewLifecycleOwner, { recyclerSet(it) })
+        //одно фото
+        viewModel.setOnePhoto.observe(viewLifecycleOwner, {
+            Picasso.get().load(it).into(binding.oneImage)
+        })
     }
 
     //метод recycler view
@@ -34,6 +39,7 @@ class SecondScreenFragment : Fragment(R.layout.fragment_second_screen) {
         binding.recyclerImages.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         binding.recyclerImages.adapter = adapter
+        //адаптер
         adapter.setItems(it)
     }
 
@@ -49,27 +55,10 @@ class SecondScreenFragment : Fragment(R.layout.fragment_second_screen) {
 
     }
 
-    //получение фоток
+    //получение фото
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-
-        if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE) {
-            // много
-            val photoList: ArrayList<String> = ArrayList()
-
-            if (data!!.clipData != null) {
-                val count = data.clipData!!.itemCount
-                for (i in 0 until count) {
-                    val imageUri: Uri = data.clipData?.getItemAt(i)!!.uri
-                    photoList.add(imageUri.toString())
-                }
-                //recycler images
-                recyclerSet(photoList)
-                //одна
-            } else if (data.data != null) {
-                val imageUri: Uri = data.data!!
-                Picasso.get().load(imageUri).into(binding.oneImage)
-            }
-        }
+        //метод из view model
+        viewModel.getUser(requestCode, resultCode, data)
     }
 }

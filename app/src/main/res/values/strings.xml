@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">AttractorSoftware</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="high_school">High School</string>
+    <string name="bachelor">Bachelor</string>
+    <string name="master">Master</string>
+    <string name="doctoral">Doctoral</string>
+    <string name="firstScreen">Первый экран</string>
+    <string name="secondScreen">Второй экран</string>
+    <string name="photo">Photo</string>
+    <string name="second_name">Second name</string>
+    <string name="_1_2_3_4">1 2 3 4</string>
+    <string name="company">Компания:</string>
+    <string name="first_name">First name</string>
+    <string name="select_image">Select Image</string>
+    <string name="name_company">Имя</string>
+    <string name="position_company">позиция</string>
+    <string name="hello">Приветствую! Коротно обо мне...</string>
+</resources>
